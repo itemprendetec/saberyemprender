@@ -29,7 +29,7 @@ const Private = ({ data }) => {
               <>
                 <main>
                   <Sidebar>
-                    <div class="px-8 py-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="px-8 py-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 dark:bg-gray-800">
                       <div class="w-full mb-1">
                         <div class="mb-4">
                           <nav class="flex mb-5" aria-label="Breadcrumb">
