@@ -46,9 +46,6 @@ export default function Home() {
           signInSuccessUrl={signInSuccessUrl}
         />
       </Login>
-      {/* {!userRedirect ? <Login /> : <>
-        <h1>Si hay un usuario</h1>
-      </>} */}
     </>
   )
 }
