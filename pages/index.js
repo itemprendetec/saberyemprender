@@ -37,9 +37,10 @@ const Private = ({ data }) => {
   const onSearchChange = (event) => {
     let qr = event.target.value;
     let updatedList = [...users];
-
+    console.log(qr);
     //updatedList.filter((upd) => upd.NOMBRE_APELLIDO.length > 16)
-    console.log(updatedList)
+    console.log(updatedList.filter((upd) => String(upd.NOMBRE_APELLIDO)
+    .toUpperCase().includes(qr.toUpperCase())))
     // console.log(updatedList)
     // setSearchfield(event.target.value);
   };
