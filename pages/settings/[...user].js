@@ -41,7 +41,7 @@ const Settings = ({ data }) => {
                 <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
                   <li class="inline-flex items-center">
                     <a
-                      href="#"
+                      href="http://localhost:3000/"
                       class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white"
                     >
                       <svg
@@ -130,20 +130,68 @@ const Settings = ({ data }) => {
               <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">Curso</h3>
                 <div class="mb-4">
-                  <label
-                    for="settings-language"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Observaciones
-                  </label>
-                  <input
-                    type="text"
-                    name="first-name"
-                    id="first-name"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder={data.OBSERVACIONES}
-                    required
-                  />
+                <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Observaciones</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditObservaciones" onClick={() => {
+                            const eInput = document.getElementById("inputObservaciones");
+                            const edInput = document.getElementById("inputObservacionesEdit");
+                            const bEdit = document.getElementById("buttonEditObservaciones");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.OBSERVACIONES
+                            eInput.value = data?.OBSERVACIONES
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputObservacionesEdit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputObservaciones");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.OBSERVACIONES
+
+                              const res = await updateField(data);
+                              console.log(">>>", res)
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button onClick={() => {
+                              const eInput = document.getElementById("inputObservaciones");
+                              const edInput = document.getElementById("inputObservacionesEdit");
+                              const bEdit = document.getElementById("buttonEditObservaciones");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      <input
+                        type="number"
+                        name="country"
+                        id="inputObservaciones"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder={data?.OBSERVACIONES}
+                        onChange={(e) => {
+                          data.OBSERVACIONES = e.target.value
+                        }}
+                        disabled={true}
+                      />
                 </div>
                 <div class="mb-6">
                   <label
@@ -180,23 +228,70 @@ const Settings = ({ data }) => {
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">
                   Información general
                 </h3>
-                <form action="#">
+                
                   <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6">
-                      <label
-                        for="first-name"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        Nombre y Apellido
+                        <span className="block">Nombre y Apellido</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditName" onClick={() => {
+                            const eInput = document.getElementById("inputName");
+                            const edInput = document.getElementById("inputNameEdit");
+                            const bEdit = document.getElementById("buttonEditName");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.NOMBRE_APELLIDO
+                            eInput.value = data?.NOMBRE_APELLIDO
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputNameEdit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputName");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.NOMBRE_APELLIDO
+
+                              const res = await updateField(data);
+                              console.log(">>>", res)
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button onClick={() => {
+                              const eInput = document.getElementById("inputName");
+                              const edInput = document.getElementById("inputNameEdit");
+                              const bEdit = document.getElementById("buttonEditName");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
                       </label>
                       <input
-                        type="text"
-                        name="first-name"
-                        id="first-name"
+                        type="number"
+                        name="country"
+                        id="inputName"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder={data.NOMBRE_APELLIDO}
-                        defaultValue={data.NOMBRE_APELLIDO}
-                        required
+                        placeholder={data?.NOMBRE_APELLIDO}
+                        onChange={(e) => {
+                          data.NOMBRE_APELLIDO = e.target.value
+                        }}
+                        disabled={true}
                       />
                     </div>
 
@@ -543,7 +638,7 @@ const Settings = ({ data }) => {
                       </button>
                     </div>
                   </div>
-                </form>
+                
               </div>
             </div>
           </div>
