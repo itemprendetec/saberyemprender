@@ -51,7 +51,7 @@ const Sidebar = (props) => {
     </aside>
 
     <div class=" sm:ml-32">
-      <div class=" border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+      <div class=" border-gray-200 border-dashed rounded-lg dark:border-gray-700 h-screen">
         {props.children}
       </div>
     </div>

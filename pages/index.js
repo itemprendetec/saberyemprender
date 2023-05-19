@@ -23,25 +23,31 @@ const Private = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [searchfield, setSearchfield] = useState();
+  const [searchfield, setSearchfield] = useState('');
 
   const [filteredList, setFilteredList] = useState();
 
   useEffect(() => {
     setDataUsers(data);
     let fdl = chunckArrayInGroups(data, 20);
-    setFilteredList(fdl);
+    setFilteredList(data);
     setTotalPages(fdl.length);
     setLoading(false);
   }, []);
 
   const onSearchChange = (event) => {
-    let qr = event.target.value;
+    setSearchfield(event.target.value);
+    let qr = String(searchfield)
     let updatedList = [...users];
     console.log(qr);
+    console.log("searchfield " + searchfield);
     //updatedList.filter((upd) => upd.NOMBRE_APELLIDO.length > 16)
     console.log(updatedList.filter((upd) => String(upd.NOMBRE_APELLIDO)
     .toUpperCase().includes(qr.toUpperCase())))
+    data = updatedList.filter((upd) => String(upd.NOMBRE_APELLIDO)
+    .toUpperCase().includes(qr.toUpperCase()))
+
+/*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
   };
@@ -108,7 +114,7 @@ const Private = ({ data }) => {
                                     href="#"
                                     class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white"
                                   >
-                                    Users
+                                    Usuarios
                                   </a>
                                 </div>
                               </li>
@@ -137,7 +143,7 @@ const Private = ({ data }) => {
                             </ol>
                           </nav>
                           <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                            All users
+                            Todos los usuarios
                           </h1>
                         </div>
                         <div class="sm:flex">
@@ -152,7 +158,7 @@ const Private = ({ data }) => {
                                   name="searchfield"
                                   id="users-search"
                                   class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                  placeholder="Search for users"
+                                  placeholder="Buscar usuarios"
                                   onChange={(e) => onSearchChange(e)}
                                 />
                               </div>
@@ -228,7 +234,7 @@ const Private = ({ data }) => {
                             
                             <button onClick={ () =>{
                               const modaladd = document.getElementById("add-user-modal");
-                              modaladd.className = "fixed left-0 right-0 z-50 items-center justify-center  overflow-x-auto overflow-y-auto top-4 md:inset-0 h-auto sm:h-full lg:h-auto xl:h-auto";
+                              modaladd.className = "fixed left-0 right-auto z-50 items-center justify-center overflow-x-auto overflow-y-auto top-4 md:inset-0 h-auto ml-px sm:h-full ml-px lg:h-auto ml-px xl:h-auto ml-px";
                             }
                               
                             }
@@ -343,10 +349,10 @@ const Private = ({ data }) => {
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                {filteredList[currentPage].map((usr, index) => (
+                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).map((usr, index) => (
                                   <>
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                      <td class="w-4 p-4">{index + 1}</td>
+                                      <td class="w-4 p-4">{index + 1}</td> {}
                                       <td class="flex items-center p-4 mr-2 space-x-2 whitespace-nowrap">
                                         <div class="text-xs font-normal text-gray-500 dark:text-gray-400">
                                           <div class="text-xs font-semibold text-gray-900 dark:text-white">
@@ -471,23 +477,16 @@ const Private = ({ data }) => {
                           </svg>
                         </a>
                         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                          Mostrando{" "}
+                          Actualmente existen un total de {" "}
                           <span class="font-semibold text-gray-900 dark:text-white">
-                            20
+                            {filteredList.length}
                           </span>{" "}
-                          resultados de la página{" "}
-                          <span class="font-semibold text-gray-900 dark:text-white">
-                            {currentPage + 1}
-                          </span>{" "}
-                          de{" "}
-                          <span class="font-semibold text-gray-900 dark:text-white">
-                            {totalPages}
-                          </span>{" "}
-                          páginas
+                          Alumnos en la plataforma{" "}
+                          
                         </span>
                       </div>
                       <div class="flex items-center space-x-3">
-                        <a
+                        {/* <a
                           href="#"
                           onClick={() => {
                             if (currentPage - 1 < 0) return;
@@ -530,7 +529,7 @@ const Private = ({ data }) => {
                               clip-rule="evenodd"
                             ></path>
                           </svg>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                   </Sidebar>
@@ -616,7 +615,12 @@ const Private = ({ data }) => {
                             </select>
                         </div>
                         
-                        
+                        <div class="col-span-6 sm:col-span-3">
+                            <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ronda</label>
+                            <input type="number" name="position" id="ronda" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Ronda" required/>
+                            
+                        </div>
+
                         <div class="col-span-6">
                             <label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
                             <textarea id="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Observaciones"></textarea>
@@ -634,6 +638,7 @@ const Private = ({ data }) => {
                       const getdias = document.getElementById("Dias");
                       const getseccion = document.getElementById("Seccion");
                       const getcarrera = document.getElementById("Carrera");
+                      const getronda = document.getElementById("ronda");
                       console.log(getnombre.value)
                       console.log(getcedula.value)
                       console.log(getemail.value)
