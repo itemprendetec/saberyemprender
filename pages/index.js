@@ -558,11 +558,11 @@ const Private = ({ data }) => {
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 ">
                             <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre y Apellido</label>
-                            <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required/>
+                            <input type="text" name="first-name" id="nombre" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Nombre" required/>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cédula</label>
-                            <input type="number" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="V-" required/>
+                            <input type="number" name="last-name" id="cedula" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="V-" required/>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
@@ -570,55 +570,79 @@ const Private = ({ data }) => {
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-                            <input type="number" name="position" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Teléfono" required/>
+                            <input type="number" name="position" id="phone" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Teléfono" required/>
+                            
                         </div>
                         
                         <div class="col-span-6 sm:col-span-3">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Turno</label>
-                            <input type="text" name="position" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. React developer" required/>
+                            
+                            <select required id="Turno" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "0"> MATUTINO</option>
+                              <option value = "1"> VESPERTINO</option>
+                            
+                            </select>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Días</label>
-                            <input type="text" name="position" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. React developer" required/>
+                            
+                            <select required id="Dias" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "0"> LUNES Y MARTES</option>
+                              <option value = "1"> MIERCOLES Y JUEVES</option>
+                              
+
+                            </select>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sección</label>
-                            <input type="text" name="position" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. React developer" required/>
+                            
+                            <select required id="Seccion" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "A"> A</option>
+                              <option value = "B"> B</option>
+                              <option value = "C"> C</option>
+                              <option value = "D"> D</option>
+
+                            </select>
                         </div>
                         <div class="col-span-6 sm:col-span-3">
                             <label for="position" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera</label>
-                            <input type="text" name="position" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. React developer" required/>
                             
+                            <select required id="Carrera" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "COCINA"> COCINA</option>
+                              <option value = "PANADERIA"> PANADERIA</option>
+                              <option value = "BARISMO"> BARISMO</option>
+                              <option value = "REPOSTERIA"> REPOSTERIA</option>
+
+                            </select>
                         </div>
-                        <div>
-                          <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                            Options
-                            <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
-                            </svg>
-                          </button>
-                        </div>
-                        <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-    <div class="py-1" role="none">
-      
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-      <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
-      <form method="POST" action="#" role="none">
-        <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-      </form>
-    </div>
-  </div>
+                        
                         
                         <div class="col-span-6">
                             <label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
-                            <textarea id="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="👨‍💻Full-stack web developer. Open-source contributor."></textarea>
+                            <textarea id="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Observaciones"></textarea>
                         </div>
                     </div> 
                 </div>
                 {/* <!-- Modal footer --> */}
                 <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                    <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
+                    <button onClick={() =>{
+                      const getnombre = document.getElementById("nombre");
+                      const getcedula = document.getElementById("cedula");
+                      const getemail = document.getElementById("email");
+                      const getphone = document.getElementById("phone");
+                      const getturno = document.getElementById("Turno");
+                      const getdias = document.getElementById("Dias");
+                      const getseccion = document.getElementById("Seccion");
+                      const getcarrera = document.getElementById("Carrera");
+                      console.log(getnombre.value)
+                      console.log(getcedula.value)
+                      console.log(getemail.value)
+                      console.log(getphone.value)
+                      console.log(getturno.value)
+                      console.log(getdias.value)
+                      console.log(getseccion.value)
+                      console.log(getcarrera.value)
+                    }} class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
                 </div>
                 
             
