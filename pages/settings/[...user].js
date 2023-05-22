@@ -141,8 +141,8 @@ const Settings = ({ data }) => {
                             const edInput = document.getElementById("inputObservacionesEdit");
                             const bEdit = document.getElementById("buttonEditObservaciones");
                             eInput.disabled = false;
-                            eInput.defaultValue = data?.OBSERVACIONES
-                            eInput.value = data?.OBSERVACIONES
+                            eInput.defaultValue = data.OBSERVACIONES== undefined ? "" : data.OBSERVACIONES
+                            eInput.value = data.OBSERVACIONES== undefined ? "" : data.OBSERVACIONES
                             edInput.className = "flex space-x-1"
                             bEdit.className = "hidden"
                           }}>
@@ -155,7 +155,7 @@ const Settings = ({ data }) => {
                             <button onClick={async () => {
                               const eInput = document.getElementById("inputObservaciones");
                               eInput.disabled = false;
-                              eInput.defaultValue = data?.OBSERVACIONES
+                              eInput.defaultValue = data.OBSERVACIONES== undefined ? "" : data.OBSERVACIONES
 
                               const res = await updateField(data);
                               console.log(">>>", res)
@@ -195,19 +195,69 @@ const Settings = ({ data }) => {
                 </div>
                 <div class="mb-6">
                   <label
-                    for="settings-timezone"
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Carrera
-                  </label>
-                  <input
-                    type="text"
-                    name="first-name"
-                    id="first-name"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder={data.ASSIGN}
-                    required
-                  />
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Carrera: {data.ASSIGN}</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditCarrera" onClick={() => {
+                            const eInput = document.getElementById("inputCarrera");
+                            const edInput = document.getElementById("inputCarreraEdit");
+                            const bEdit = document.getElementById("buttonEditCarrera");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASSIGN
+                            eInput.value = data?.ASSIGN
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputCarreraEdit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputCarrera");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASSIGN
+
+                              const res = await updateField(data);
+                              console.log(">>>", res)
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button onClick={() => {
+                              const eInput = document.getElementById("inputCarrera");
+                              const edInput = document.getElementById("inputCarreraEdit");
+                              const bEdit = document.getElementById("buttonEditCarrera");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <select disabled={true} id="inputCarrera" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              
+                              <option value = "COCINA"> COCINA</option>
+                              <option value = "PANADERIA"> PANADERIA</option>
+                              <option value = "BARISMO"> BARISMO</option>
+                              <option value = "REPOSTERIA"> REPOSTERIA</option>
+
+                              onChange={(e) => {
+                          data.ASSIGN = e.target.value
+                        }}
+                        
+                            </select>
                 </div>
                 <div>
                   <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
@@ -283,7 +333,7 @@ const Settings = ({ data }) => {
                         </div>
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         name="country"
                         id="inputName"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -359,6 +409,72 @@ const Settings = ({ data }) => {
                         disabled={true}
                       />
                     </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Correo</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditCorreo" onClick={() => {
+                            const eInput = document.getElementById("inputCorreo");
+                            const edInput = document.getElementById("inputCorreoEdit");
+                            const bEdit = document.getElementById("buttonEditCorreo");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.CORREO
+                            eInput.value = data?.CORREO
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputCorreoEdit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputCorreo");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.CORREO
+
+                              const res = await updateField(data);
+                              console.log(">>>", res)
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button onClick={() => {
+                              const eInput = document.getElementById("inputCorreo");
+                              const edInput = document.getElementById("inputCorreoEdit");
+                              const bEdit = document.getElementById("buttonEditCorreo");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      <input
+                        type="number"
+                        name="country"
+                        id="inputCorreo"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder={data?.CORREO}
+                        onChange={(e) => {
+                          data.CORREO = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                    </div>
+
                     <div class="col-span-6 sm:col-span-3">
                       <label
                         for="phone"
@@ -541,7 +657,7 @@ const Settings = ({ data }) => {
                           </div>
                         </div>
                       </label>
-                      <input
+                       { /* <input
                         type="text"
                         name="turn"
                         id="inputTurno"
@@ -550,12 +666,21 @@ const Settings = ({ data }) => {
                             data.HORARIO.turno == 0 ? "Matutino" : "Vespertino"
                         }
                         onChange={(e) => {
-                            const a = String(e.target.value).toLowerCase == "matutino" ? 0 : 1
-                          data.HORARIO.turno = a
+                           data.HORARIO.turno  = e.target.value
                         }}
                         disabled={true}
-                      />
+                      /> */}
+
+                      <select id="inputTurno" disabled={true}
+                     onChange={(e) => {
+                            data.HORARIO.turno  = e.target.value
+                        }} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "0"> MATUTINO</option>
+                              <option value = "1"> VESPERTINO</option>
+                            
+                            </select>
                     </div>
+                    
 
                     <div class="col-span-6 sm:col-span-3">
                       <label
@@ -609,22 +734,32 @@ const Settings = ({ data }) => {
                           </div>
                         </div>
                       </label>
-                      <input
-                        type="text"
-                        name="dia"
-                        id="inputDia"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder={
-                            data.HORARIO.dias == 0 ? "Lunes y martes" : "Miercoles y Jueves"
-                        }
-                        
-                        onChange={(e) => {
-                            const a = String(e.target.value).toLowerCase == "lunes y martes" ? 0 : 1
-                          data.HORARIO.dias = a
-                        }}
-                        disabled={true}
-                        
-                      />
+                      {/*<input
+                                              type="text"
+                                              name="dia"
+                                              id="inputDia"
+                                              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                              placeholder={
+                                                  data.HORARIO.dias == 0 ? "Lunes y martes" : "Miercoles y Jueves"
+                                              }
+                                              
+                                              onChange={(e) => {
+                                                  const a = String(e.target.value).toLowerCase == "lunes y martes" ? 0 : 1
+                                                data.HORARIO.dias = a
+                                              }}
+                                              disabled={true}
+                                              
+                                            />*/}
+
+                      <select id="inputDia" disabled={true}
+                     onChange={(e) => {
+                            data.HORARIO.dias  = e.target.value
+                        }} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                              <option value = "0"> Lunes y Martes</option>
+                              <option value = "1"> Miercoles y Jueves</option>
+                            
+                            </select>
+
                     </div>  
                     
                     

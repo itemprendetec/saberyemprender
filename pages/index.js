@@ -24,10 +24,12 @@ const Private = ({ data }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [searchfield, setSearchfield] = useState('');
+  const [asignacion, setAsignacion] = useState('');
 
   const [filteredList, setFilteredList] = useState();
 
   useEffect(() => {
+
     setDataUsers(data);
     let fdl = chunckArrayInGroups(data, 20);
     setFilteredList(data);
@@ -39,18 +41,26 @@ const Private = ({ data }) => {
     setSearchfield(event.target.value);
     let qr = String(searchfield)
     let updatedList = [...users];
-    console.log(qr);
-    console.log("searchfield " + searchfield);
-    //updatedList.filter((upd) => upd.NOMBRE_APELLIDO.length > 16)
-    console.log(updatedList.filter((upd) => String(upd.NOMBRE_APELLIDO)
-    .toUpperCase().includes(qr.toUpperCase())))
-    data = updatedList.filter((upd) => String(upd.NOMBRE_APELLIDO)
-    .toUpperCase().includes(qr.toUpperCase()))
+    
+   
 
 /*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
   };
+
+     function FiltroCarreras (event)  {
+    
+   setAsignacion(event.target.value)
+   console.log("asignacion: "+asignacion);
+/*     setDataUsers(data); */
+    // console.log(updatedList)
+    // setSearchfield(event.target.value);
+     
+  };
+
+  Private.FiltroCarreras = FiltroCarreras;
+
   return (
     <>
       <Head>
@@ -234,7 +244,7 @@ const Private = ({ data }) => {
                             
                             <button onClick={ () =>{
                               const modaladd = document.getElementById("add-user-modal");
-                              modaladd.className = "fixed left-0 right-auto z-50 items-center justify-center overflow-x-auto overflow-y-auto top-4 md:inset-0 h-auto ml-px sm:h-full ml-px lg:h-auto ml-px xl:h-auto ml-px";
+                              modaladd.className = "fixed left-0 right-auto z-50 items-center justify-center overflow-x-auto overflow-y-auto top-4 md:inset-0 h-auto  sm:h-auto lg:h-auto xl:h-auto ";
                             }
                               
                             }
@@ -254,7 +264,7 @@ const Private = ({ data }) => {
                                   clip-rule="evenodd"
                                 ></path>
                               </svg>
-                              Add user
+                              Añadir
                             </button>
 
                             <button onClick={()=>downloadExcel(data)}
@@ -349,7 +359,7 @@ const Private = ({ data }) => {
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).map((usr, index) => (
+                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).map((usr, index) => (
                                   <>
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                       <td class="w-4 p-4">{index + 1}</td> {}
@@ -535,6 +545,7 @@ const Private = ({ data }) => {
                   </Sidebar>
                  {/* <!-- Add User Modal --> */}
 <div class="hidden" id="add-user-modal">
+<form> 
     <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
         {/* <!-- Modal content --> */}
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
@@ -553,7 +564,7 @@ const Private = ({ data }) => {
             </div>
             {/* <!-- Modal body --> */}
             <div class="p-6 space-y-6">
-                
+               
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 ">
                             <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre y Apellido</label>
@@ -623,9 +634,10 @@ const Private = ({ data }) => {
 
                         <div class="col-span-6">
                             <label for="biography" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observaciones</label>
-                            <textarea id="biography" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Observaciones"></textarea>
+                            <textarea id="observa" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Observaciones"></textarea>
                         </div>
                     </div> 
+                    
                 </div>
                 {/* <!-- Modal footer --> */}
                 <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
@@ -639,6 +651,7 @@ const Private = ({ data }) => {
                       const getseccion = document.getElementById("Seccion");
                       const getcarrera = document.getElementById("Carrera");
                       const getronda = document.getElementById("ronda");
+                      const getobserva = document.getElementById("observa");
                       console.log(getnombre.value)
                       console.log(getcedula.value)
                       console.log(getemail.value)
@@ -647,12 +660,15 @@ const Private = ({ data }) => {
                       console.log(getdias.value)
                       console.log(getseccion.value)
                       console.log(getcarrera.value)
+                      console.log(getronda.value)
+                      console.log(getobserva.value)
                     }} class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
                 </div>
                 
             
         </div>
     </div>
+    </form>
 </div>
                 </main>
               </>
@@ -664,6 +680,7 @@ const Private = ({ data }) => {
     </>
   );
 };
+
 
 const downloadExcel = (data) => {
   const worksheet = XLSX.utils.json_to_sheet(data);
@@ -688,6 +705,8 @@ export async function getServerSideProps() {
 }
 
 export default withAuth(Private);
+export function FiltroCarrera(event) {Private.FiltroCarreras(event)}
+
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";
 // import initFirebase from '../config';
