@@ -2,7 +2,7 @@
 import clientPromise from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 
-export default async function updateUser(req, res) {
+export default async function addUser(req, res) {
   const user = JSON.parse(req.body);
  
 
@@ -12,7 +12,7 @@ export default async function updateUser(req, res) {
      const db = client.db("saberyemprender");
      // const updateuser = await db.collection("users").updateOne({ "_id": new ObjectId(user._id) }, { $set: { ...user } })
 
-     const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
+     /* const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
        NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
         CEDULA : user.CEDULA,
         ASSIGN : user.ASSIGN,
@@ -23,8 +23,9 @@ export default async function updateUser(req, res) {
         ROUND : user.ROUND,
         SECCION : user.SECCION, 
         TELEFONO : user.TELEFONO,  
-        } })
-     //const updateuser = await db.collection("general").replaceOne({ "_id": new ObjectId(user._id) }, { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA }, { upsert: true });
+        } }) */
+     const adduser = await db.collection("general").insertOne(
+      { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA });
 
     /* if (updateuser) {
        console.log(">>>>>>.", updateuser)

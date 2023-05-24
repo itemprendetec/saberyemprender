@@ -49,7 +49,16 @@ const Private = ({ data }) => {
     // setSearchfield(event.target.value);
   };
 
-     function FiltroCarreras (event)  {
+
+  const addField = async (upd) => {
+    const res = await fetch(`http://localhost:3000/api/addUser`, {
+      method: "PUT",
+      body: JSON.stringify(upd),
+    });
+    return res.json();
+  }
+
+  function FiltroCarreras (event)  {
     
    setAsignacion(event.target.value)
    console.log("asignacion: "+asignacion);

@@ -23,6 +23,14 @@ const Settings = ({ data }) => {
     return res.json();
   }
 
+  const Onrefresh = () =>{
+    window.location.reload()
+  }
+
+const refreshPage = () =>{
+    window.location.reload();
+} 
+
   return (
     <main className="">
       {loading ? <>
@@ -228,7 +236,8 @@ const Settings = ({ data }) => {
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
                               </svg>
                             </button>
-                            <button onClick={() => {
+                            <button
+                             onClick={() => {
                               const eInput = document.getElementById("inputCarrera");
                               const edInput = document.getElementById("inputCarreraEdit");
                               const bEdit = document.getElementById("buttonEditCarrera");
@@ -260,8 +269,13 @@ const Settings = ({ data }) => {
                             </select>
                 </div>
                 <div>
-                  <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                    Save all
+                  <button
+                  /* document.query.saelector(save1) */
+
+                  /* onClick={console.log(document.querySelector(save1))} */
+                   class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  id=" save1">
+                   Save all
                   </button>
                 </div>
               </div>
@@ -463,7 +477,7 @@ const Settings = ({ data }) => {
                         </div>
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         name="country"
                         id="inputCorreo"
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -673,9 +687,9 @@ const Settings = ({ data }) => {
 
                       <select id="inputTurno" disabled={true}
                      onChange={(e) => {
-                            data.HORARIO.turno  = e.target.value
+                            data.HORARIO.turno  = parseInt(e.target.value)
                         }} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                              <option value = "0"> MATUTINO</option>
+                              <option value = "0" > MATUTINO</option>
                               <option value = "1"> VESPERTINO</option>
                             
                             </select>
@@ -765,9 +779,10 @@ const Settings = ({ data }) => {
                     
 
                     <div class="col-span-6 sm:col-full">
-                      <button
+                      <button 
                         class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                         type="submit"
+                        id="save2"
                       >
                         Save all
                       </button>
