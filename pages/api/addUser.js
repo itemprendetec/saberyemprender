@@ -25,7 +25,24 @@ export default async function addUser(req, res) {
         TELEFONO : user.TELEFONO,  
         } }) */
      const adduser = await db.collection("general").insertOne(
-      { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA });
+      { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
+         CEDULA : user.CEDULA,
+          ASSIGN : user.ASSIGN,
+        CORREO : user.CORREO,
+          "HORARIO.turno" : user.HORARIO.turno,
+          "HORARIO.dia" : user.HORARIO.dia,
+        OBSERVACIONES : user.OBSERVACIONES,
+        ROUND : user.ROUND,
+        SECCION : user.SECCION, 
+        TELEFONO : user.TELEFONO,
+        ASISTENCIA_1 : user.ASISTENCIA_1,
+        ASISTENCIA_2 : user.ASISTENCIA_2,
+        ASISTENCIA_3 : user.ASISTENCIA_3,
+        ASISTENCIA_4 : user.ASISTENCIA_4,
+        ASISTENCIA_5 : user.ASISTENCIA_5,
+        ASISTENCIA_6 : user.ASISTENCIA_6,
+        ASISTENCIA_7 : user.ASISTENCIA_7,
+        ASISTENCIA_8 : user.ASISTENCIA_8, });
 
     /* if (updateuser) {
        console.log(">>>>>>.", updateuser)

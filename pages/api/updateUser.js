@@ -22,7 +22,15 @@ export default async function updateUser(req, res) {
         OBSERVACIONES : user.OBSERVACIONES,
         ROUND : user.ROUND,
         SECCION : user.SECCION, 
-        TELEFONO : user.TELEFONO,  
+        TELEFONO : user.TELEFONO,
+        ASISTENCIA_1 : user.ASISTENCIA_1,
+        ASISTENCIA_2 : user.ASISTENCIA_2,
+        ASISTENCIA_3 : user.ASISTENCIA_3,
+        ASISTENCIA_4 : user.ASISTENCIA_4,
+        ASISTENCIA_5 : user.ASISTENCIA_5,
+        ASISTENCIA_6 : user.ASISTENCIA_6,
+        ASISTENCIA_7 : user.ASISTENCIA_7,
+        ASISTENCIA_8 : user.ASISTENCIA_8,  
         } })
      //const updateuser = await db.collection("general").replaceOne({ "_id": new ObjectId(user._id) }, { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA }, { upsert: true });
 

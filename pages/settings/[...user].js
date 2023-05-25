@@ -23,13 +23,6 @@ const Settings = ({ data }) => {
     return res.json();
   }
 
-  const Onrefresh = () =>{
-    window.location.reload()
-  }
-
-const refreshPage = () =>{
-    window.location.reload();
-} 
 
   return (
     <main className="">
@@ -110,7 +103,7 @@ const refreshPage = () =>{
                 </ol>
               </nav>
               <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-                Configuraión del usuario
+                Información del usuario
               </h1>
             </div>
 
@@ -165,8 +158,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data.OBSERVACIONES== undefined ? "" : data.OBSERVACIONES
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -229,8 +221,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.ASSIGN
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                             
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -270,20 +261,564 @@ const refreshPage = () =>{
                 </div>
                 <div>
                   <button
-                  /* document.query.saelector(save1) */
-
-                  /* onClick={console.log(document.querySelector(save1))} */
+                  onClick={async () => {
+                          
+                    const res = await updateField(data);
+                    window.location.reload();
+                  }}
                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   id=" save1">
-                   Save all
+                   Guardar
                   </button>
                 </div>
               </div>
               <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="flow-root">
-                  <h3 class="text-xl font-semibold dark:text-white">
-                    RONDA {data.ROUND}
-                  </h3>
+                  <div>
+                    <h3 class="text-xl font-semibold dark:text-white">
+                      RONDA {data.ROUND}
+                    </h3>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+              <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">Asistencias</h3>
+                <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 1</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia1" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia1");
+                            const edInput = document.getElementById("inputAsistencia1Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia1");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_1
+                            eInput.value = data?.ASISTENCIA_1
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia1Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia1");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_1
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia1");
+                              const edInput = document.getElementById("inputAsistencia1Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia1");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia1"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_1}
+                        onChange={(e) => {
+                          data.ASISTENCIA_1 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 2</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia2" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia2");
+                            const edInput = document.getElementById("inputAsistencia2Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia2");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_2
+                            eInput.value = data?.ASISTENCIA_2
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia2Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia2");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_2
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia2");
+                              const edInput = document.getElementById("inputAsistencia2Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia2");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia2"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_2}
+                        onChange={(e) => {
+                          data.ASISTENCIA_2 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 3</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia3" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia3");
+                            const edInput = document.getElementById("inputAsistencia3Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia3");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_3
+                            eInput.value = data?.ASISTENCIA_3
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia3Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia3");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_3
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia3");
+                              const edInput = document.getElementById("inputAsistencia3Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia3");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia3"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_3}
+                        onChange={(e) => {
+                          data.ASISTENCIA_3 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 4</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia4" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia4");
+                            const edInput = document.getElementById("inputAsistencia4Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia4");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_4
+                            eInput.value = data?.ASISTENCIA_4
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia4Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia4");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_4
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia4");
+                              const edInput = document.getElementById("inputAsistencia4Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia4");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia4"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_4}
+                        onChange={(e) => {
+                          data.ASISTENCIA_4 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 5</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia5" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia5");
+                            const edInput = document.getElementById("inputAsistencia5Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia5");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_5
+                            eInput.value = data?.ASISTENCIA_5
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia5Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia5");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_5
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia5");
+                              const edInput = document.getElementById("inputAsistencia5Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia5");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia5"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_5}
+                        onChange={(e) => {
+                          data.ASISTENCIA_5 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 6</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia6" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia6");
+                            const edInput = document.getElementById("inputAsistencia6Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia6");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_6
+                            eInput.value = data?.ASISTENCIA_6
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia6Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia6");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_6
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia6");
+                              const edInput = document.getElementById("inputAsistencia6Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia6");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia6"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_6}
+                        onChange={(e) => {
+                          data.ASISTENCIA_6 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 7</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia7" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia7");
+                            const edInput = document.getElementById("inputAsistencia7Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia7");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_7
+                            eInput.value = data?.ASISTENCIA_7
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia7Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia7");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_7
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia7");
+                              const edInput = document.getElementById("inputAsistencia7Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia7");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia7"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_7}
+                        onChange={(e) => {
+                          data.ASISTENCIA_7 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                <div class="col-span-6 sm:col-span-2">
+                  <label
+                        for="country"
+                        class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        <span className="block">Asistencia 8</span>
+                        <div className="flex space-x-2">
+                          <button id="buttonEditAsistencia8" onClick={() => {
+                            const eInput = document.getElementById("inputAsistencia8");
+                            const edInput = document.getElementById("inputAsistencia8Edit");
+                            const bEdit = document.getElementById("buttonEditAsistencia8");
+                            eInput.disabled = false;
+                            eInput.defaultValue = data?.ASISTENCIA_8
+                            eInput.value = data?.ASISTENCIA_8
+                            edInput.className = "flex space-x-1"
+                            bEdit.className = "hidden"
+                          }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-gray-400" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                            </svg>
+                          </button>
+                          <div id="inputAsistencia8Edit" className="hidden space-x-1">
+                            <button onClick={async () => {
+                              const eInput = document.getElementById("inputAsistencia7");
+                              eInput.disabled = false;
+                              eInput.defaultValue = data?.ASISTENCIA_8
+
+                             
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                              </svg>
+                            </button>
+                            <button
+                             onClick={() => {
+                              const eInput = document.getElementById("inputAsistencia8");
+                              const edInput = document.getElementById("inputAsistencia8Edit");
+                              const bEdit = document.getElementById("buttonEditAsistencia8");
+                              eInput.disabled = true;
+                              eInput.defaultValue = ""
+                              eInput.value = ""
+                              edInput.className = "hidden space-x-1"
+                              bEdit.className = "block"
+                            }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-red-500 w-6 h-6" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <input
+                        type="text"
+                        name="country"
+                        id="inputAsistencia8"
+                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-28 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 "
+                        placeholder={data?.ASISTENCIA_8}
+                        onChange={(e) => {
+                          data.ASISTENCIA_8 = e.target.value
+                        }}
+                        disabled={true}
+                      />
+                </div>
+                </div>
+                <br></br>
+                <div>
+                  <button
+                  onClick={async () => {
+                          
+                    const res = await updateField(data);
+                    window.location.reload();
+                  }}
+                   class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  id=" save1">
+                   Guardar
+                  </button>
                 </div>
               </div>
             </div>
@@ -322,8 +857,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.NOMBRE_APELLIDO
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -387,8 +921,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.CEDULA
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -452,8 +985,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.CORREO
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -517,8 +1049,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.TELEFONO
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -582,8 +1113,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.SECCION
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -647,8 +1177,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.HORARIO.turno == 0 ? "Matutino" : "Vespertino"
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -724,8 +1253,7 @@ const refreshPage = () =>{
                               eInput.disabled = false;
                               eInput.defaultValue = data?.HORARIO.dias == 0 ? "Lunes y martes" : "Miercoles y Jueves"
 
-                              const res = await updateField(data);
-                              console.log(">>>", res)
+                              
                             }}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="fill-green-500 w-6 h-6" viewBox="0 0 16 16">
                                 <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
@@ -779,12 +1307,16 @@ const refreshPage = () =>{
                     
 
                     <div class="col-span-6 sm:col-full">
-                      <button 
+                      <button onClick={async () => {
+                          
+                              const res = await updateField(data);
+                              window.location.reload();
+                            }}
                         class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        type="submit"
+                        
                         id="save2"
                       >
-                        Save all
+                        Guardar
                       </button>
                     </div>
                   </div>
