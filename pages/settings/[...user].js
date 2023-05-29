@@ -36,6 +36,7 @@ const Settings = ({ data }) => {
         </div>
       </> : <>
         {user?.email && (<>
+          
           <div class="grid h-screen grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
             <div class="mb-4 col-span-full xl:mb-2">
               <nav class="flex mb-5" aria-label="Breadcrumb">
@@ -126,6 +127,25 @@ const Settings = ({ data }) => {
 
 
                   </div>
+                  
+                      <button
+                      value= {data.ESPERA == "Si" ? "Si" : "No"}
+                        onClick={async (e) => {
+                          //event.target.value = 
+                          //console.log(e.target.value)      
+                          data.ESPERA = e.target.value == "Si" ? "No" : "Si"
+                          console.log(data.ESPERA)
+                          const res = await updateField(data);   
+                          window.location.reload();
+                        }}
+                         class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        id=" save1">
+                         En espera: {data.ESPERA == "Si" ? "Si" : "No"}
+                  </button>
+                      
+                  
+                  
+
                 </div>
               </div>
               <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -951,7 +971,7 @@ const Settings = ({ data }) => {
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder={data?.CEDULA}
                         onChange={(e) => {
-                          data.CEDULA = e.target.value
+                          data.CEDULA = parseInt(e.target.value)
                         }}
                         disabled={true}
                       />
@@ -1079,7 +1099,7 @@ const Settings = ({ data }) => {
                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder={data?.TELEFONO}
                         onChange={(e) => {
-                          data.TELEFONO = e.target.value
+                          data.TELEFONO = parseInt(e.target.value)
                         }}
                         disabled={true}
                       />
@@ -1295,7 +1315,7 @@ const Settings = ({ data }) => {
 
                       <select id="inputDia" disabled={true}
                      onChange={(e) => {
-                            data.HORARIO.dias  = e.target.value
+                            data.HORARIO.dias  = parseInt(e.target.value)
                         }} class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                               <option value = "0"> Lunes y Martes</option>
                               <option value = "1"> Miercoles y Jueves</option>

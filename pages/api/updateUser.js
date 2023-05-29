@@ -7,7 +7,7 @@ export default async function updateUser(req, res) {
  
 
    try {
-    console.log("hola ")
+    
       const client = await clientPromise;
      const db = client.db("saberyemprender");
      // const updateuser = await db.collection("users").updateOne({ "_id": new ObjectId(user._id) }, { $set: { ...user } })
@@ -18,7 +18,7 @@ export default async function updateUser(req, res) {
         ASSIGN : user.ASSIGN,
         CORREO : user.CORREO,
           "HORARIO.turno" : user.HORARIO.turno,
-          "HORARIO.dia" : user.HORARIO.dia,
+          "HORARIO.dias" : user.HORARIO.dias,
         OBSERVACIONES : user.OBSERVACIONES,
         ROUND : user.ROUND,
         SECCION : user.SECCION, 

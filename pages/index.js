@@ -25,6 +25,7 @@ const Private = ({ data }) => {
   const [loading, setLoading] = useState(true);
   const [searchfield, setSearchfield] = useState('');
   const [asignacion, setAsignacion] = useState('');
+  const [standby, setStandby] = useState('');
 
   const [filteredList, setFilteredList] = useState();
 
@@ -61,7 +62,17 @@ const Private = ({ data }) => {
   function FiltroCarreras (event)  {
     
    setAsignacion(event.target.value)
-   console.log("asignacion: "+asignacion);
+   setStandby("")
+/*     setDataUsers(data); */
+    // console.log(updatedList)
+    // setSearchfield(event.target.value);
+     
+  };
+
+  function FiltroEsperas (event)  {
+    
+   setStandby(event.target.value)
+   setAsignacion("")
 /*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
@@ -69,6 +80,7 @@ const Private = ({ data }) => {
   };
 
   Private.FiltroCarreras = FiltroCarreras;
+  Private.FiltroEsperas= FiltroEsperas;
 
   return (
     <>
@@ -363,21 +375,21 @@ const Private = ({ data }) => {
                                     scope="col"
                                     class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                                   >
-                                    Actions
+                                    Editar
                                   </th>
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).map((usr, index) => (
+                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).filter((upd) => String(upd.ESPERA).includes(standby)).map((usr, index) => (
                                   <>
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                       <td class="w-4 p-4">{index + 1}</td> {}
                                       <td class="flex items-center p-4 mr-2 space-x-2 whitespace-nowrap">
                                         <div class="text-xs font-normal text-gray-500 dark:text-gray-400">
                                           <div class="text-xs font-semibold text-gray-900 dark:text-white">
-                                            {String(
+                                            { String(
                                               usr.NOMBRE_APELLIDO
-                                            ).toUpperCase()}
+                                            ).toUpperCase().substring(0, 20)}
                                           </div>
                                         </div>
                                       </td>
@@ -386,7 +398,9 @@ const Private = ({ data }) => {
                                         V-{usr.CEDULA}
                                       </td>
                                       <td class="max-w-sm p-4 overflow-hidden text-xs font-npositional text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                                        {usr.CORREO}
+                                        {String(
+                                              usr.CORREO
+                                            ).substring(0, 20)+ "..."}
                                       </td>
                                       <td class="p-4 text-xs font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {usr.TELEFONO}
@@ -403,8 +417,8 @@ const Private = ({ data }) => {
                                       <td class="p-4 text-xs uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <span className="font-bold block">
                                           {usr.HORARIO.turno == 0
-                                            ? "Turno matutino"
-                                            : "Turno vespertino"}
+                                            ? "matutino"
+                                            : "vespertino"}
                                         </span>
                                       </td>
                                       <td class="p-4 text-xs uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -650,7 +664,7 @@ const Private = ({ data }) => {
                 </div>
                 {/* <!-- Modal footer --> */}
                 <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                    <button onClick={() =>{
+                    <button onClick={ async() =>{
                       const getnombre = document.getElementById("nombre");
                       const getcedula = document.getElementById("cedula");
                       const getemail = document.getElementById("email");
@@ -671,6 +685,13 @@ const Private = ({ data }) => {
                       console.log(getcarrera.value)
                       console.log(getronda.value)
                       console.log(getobserva.value)
+                      const Newdata = {NOMBRE_APELLIDO: getnombre.value, CEDULA: parseInt(getcedula.value),
+                       ASSIGN: getcarrera.value, CORREO: getemail.value, HORARIO:{ turno: parseInt(getturno.value), dias: parseInt(getdias.value)},
+                       OBSERVACIONES: getobserva.value, ROUND: parseInt(getronda.value), SECCION: getseccion.value, TELEFONO: parseInt(getphone.value)
+                       }
+                       console.log(Newdata)
+                       console.log(data)
+                       //const res = await addField(Newdata);
                     }} class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
                 </div>
                 
@@ -715,6 +736,7 @@ export async function getServerSideProps() {
 
 export default withAuth(Private);
 export function FiltroCarrera(event) {Private.FiltroCarreras(event)}
+export function FiltroEspera(event) {Private.FiltroEsperas(event)}
 
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";
