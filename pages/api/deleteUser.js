@@ -2,8 +2,11 @@
 import clientPromise from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 
-export default async function updateUser(req, res) {
-  const user = JSON.parse(req.body);
+export default async function deleteUser(req, res, user) {
+  //console.log("LA VAINA ESTA  "+user)
+  //const user = JSON.parse(req.body);
+  console.log( "Este es el user " + user + "Este es el req " + req.CEDULA + "Este es el res "+ res.CEDULA)
+  
  
 
    try {
@@ -12,7 +15,7 @@ export default async function updateUser(req, res) {
      const db = client.db("saberyemprender");
      // const updateuser = await db.collection("users").updateOne({ "_id": new ObjectId(user._id) }, { $set: { ...user } })
 
-     const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
+     /* const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
        NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
         CEDULA : user.CEDULA,
         ASSIGN : user.ASSIGN,
@@ -33,8 +36,8 @@ export default async function updateUser(req, res) {
         ASISTENCIA_6 : user.ASISTENCIA_6,
         ASISTENCIA_7 : user.ASISTENCIA_7,
         ASISTENCIA_8 : user.ASISTENCIA_8,  
-        } })
-     //const updateuser = await db.collection("general").replaceOne({ "_id": new ObjectId(user._id) }, { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA }, { upsert: true });
+        } }) */
+     //const updateuser = await db.collection("general").deleteOne({ "_id":  ObjectId(user._id) });
 
     /* if (updateuser) {
        console.log(">>>>>>.", updateuser)
@@ -50,8 +53,8 @@ export default async function updateUser(req, res) {
        error: error,
      })
    }
-  return res.json({
+  /* return res.json({
     json: user,
     ldp: req.body,
-  })
+  }) */
 }

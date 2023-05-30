@@ -23,7 +23,17 @@ const Settings = ({ data }) => {
     return res.json();
   }
 
+  const deleteField = async (upd) => {
+    const res = await fetch(`http://localhost:3000/api/deleteUser`, {
+      method: "DELETE",
+      body: JSON.stringify(upd),
+      
+    });
+    console.log(JSON.stringify(upd))
+    return res.deleteUser(req,res,JSON.stringify(upd));
+  }
 
+  //req,res,JSON.stringify(upd)
   return (
     <main className="">
       {loading ? <>
@@ -106,6 +116,18 @@ const Settings = ({ data }) => {
               <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                 Información del usuario
               </h1>
+              <div class="relative m-4">
+                  <button
+                  onClick={async () => {
+                         
+                    const res = await deleteField(data);
+                    window.location.reload();
+                  }}
+                   class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 absolute right-0"
+                  id="delete">
+                   Eliminar Usuario
+                  </button>
+                </div>
             </div>
 
             <div class="col-span-full xl:col-auto">
@@ -1174,7 +1196,7 @@ const Settings = ({ data }) => {
                         for="turn"
                         class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        <span className="block">Turno</span>
+                        <span className="block">Turno: {data?.HORARIO.turno == 0 ? "Matutino" : "Vespertino"}</span>
                         <div className="flex space-x-2">
                           <button id="buttonEditTurno" onClick={() => {
                             const eInput = document.getElementById("inputTurno");
@@ -1250,7 +1272,7 @@ const Settings = ({ data }) => {
                         for="dia"
                         class="flex justify-between mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
-                        <span className="block">Dias</span>
+                        <span className="block">Dias: {data?.HORARIO.dias == 0 ? "Lunes y martes" : "Miercoles y Jueves"}</span>
                         <div className="flex space-x-2">
                           <button id="buttonEditDia" onClick={() => {
                             const eInput = document.getElementById("inputDia");

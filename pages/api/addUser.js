@@ -29,8 +29,10 @@ export default async function addUser(req, res) {
          CEDULA : user.CEDULA,
           ASSIGN : user.ASSIGN,
         CORREO : user.CORREO,
-          "HORARIO.turno" : user.HORARIO.turno,
-          "HORARIO.dias" : user.HORARIO.dias,
+        HORARIO :{
+          turno: user.HORARIO.turno,
+          dias: user.HORARIO.dias,
+        },
         OBSERVACIONES : user.OBSERVACIONES,
         ROUND : user.ROUND,
         SECCION : user.SECCION, 
