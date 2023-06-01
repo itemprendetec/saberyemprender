@@ -2,10 +2,10 @@
 import clientPromise from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 
-export default async function deleteUser(req, res, user) {
+export default async function deleteUser(req, res) {
   //console.log("LA VAINA ESTA  "+user)
-  //const user = JSON.parse(req.body);
-  console.log( "Este es el user " + user + "Este es el req " + req.CEDULA + "Este es el res "+ res.CEDULA)
+  const user = JSON.parse(req.body);
+  
   
  
 
@@ -37,8 +37,9 @@ export default async function deleteUser(req, res, user) {
         ASISTENCIA_7 : user.ASISTENCIA_7,
         ASISTENCIA_8 : user.ASISTENCIA_8,  
         } }) */
-     //const updateuser = await db.collection("general").deleteOne({ "_id":  ObjectId(user._id) });
-
+        console.log( "ESTE ES EL USER ANTES: " + user._id )
+     const updateuser = await db.collection("general").deleteOne({ "_id": new ObjectId(user._id) });
+     console.log( "ESTE ES EL USER DESPUES " + user._id )
     /* if (updateuser) {
        console.log(">>>>>>.", updateuser)
      }
@@ -53,8 +54,8 @@ export default async function deleteUser(req, res, user) {
        error: error,
      })
    }
-  /* return res.json({
+   return res.json({
     json: user,
     ldp: req.body,
-  }) */
+  }) 
 }

@@ -25,12 +25,12 @@ const Settings = ({ data }) => {
 
   const deleteField = async (upd) => {
     const res = await fetch(`http://localhost:3000/api/deleteUser`, {
-      method: "DELETE",
+      method: "POST",
       body: JSON.stringify(upd),
       
     });
     console.log(JSON.stringify(upd))
-    return res.deleteUser(req,res,JSON.stringify(upd));
+    return res.json();
   }
 
   //req,res,JSON.stringify(upd)
@@ -121,7 +121,7 @@ const Settings = ({ data }) => {
                   onClick={async () => {
                          
                     const res = await deleteField(data);
-                    window.location.reload();
+                    
                   }}
                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 absolute right-0"
                   id="delete">
