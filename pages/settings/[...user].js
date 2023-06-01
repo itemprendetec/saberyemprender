@@ -121,7 +121,7 @@ const Settings = ({ data }) => {
                   onClick={async () => {
                          
                     const res = await deleteField(data);
-                    
+                    window.location.replace('http://localhost:3000');
                   }}
                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 absolute right-0"
                   id="delete">
@@ -132,7 +132,7 @@ const Settings = ({ data }) => {
 
             <div class="col-span-full xl:col-auto">
               <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <div class="items-center sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
+                <div class="grid items-center gap-4 sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
                   <img
                     class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0"
                     src={
@@ -149,7 +149,7 @@ const Settings = ({ data }) => {
 
 
                   </div>
-                  
+                  <div class="grid gap-2">
                       <button
                       value= {data.ESPERA == "Si" ? "Si" : "No"}
                         onClick={async (e) => {
@@ -165,8 +165,21 @@ const Settings = ({ data }) => {
                          En espera: {data.ESPERA == "Si" ? "Si" : "No"}
                   </button>
                       
-                  
-                  
+                  <button
+                      value= {data.LIMBO == "Si" ? "Si" : "No"}
+                        onClick={async (e) => {
+                          //event.target.value = 
+                          //console.log(e.target.value)      
+                          data.LIMBO = e.target.value == "Si" ? "No" : "Si"
+                          console.log(data.LIMBO)
+                          const res = await updateField(data);   
+                          window.location.reload();
+                        }}
+                         class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        id=" save1">
+                         En el Limbo: {data.LIMBO == "Si" ? "Si" : "No"}
+                  </button>
+                  </div>
 
                 </div>
               </div>

@@ -26,6 +26,7 @@ const Private = ({ data }) => {
   const [searchfield, setSearchfield] = useState('');
   const [asignacion, setAsignacion] = useState('');
   const [standby, setStandby] = useState('');
+  const [limbo, setLimbo] = useState('');
 
   const [filteredList, setFilteredList] = useState();
 
@@ -63,6 +64,7 @@ const Private = ({ data }) => {
     
    setAsignacion(event.target.value)
    setStandby("")
+   setLimbo("")
 /*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
@@ -73,14 +75,27 @@ const Private = ({ data }) => {
     
    setStandby(event.target.value)
    setAsignacion("")
+   setLimbo("")
 /*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
      
   };
 
+  function FiltroLimbos (event)  {
+    
+    setLimbo(event.target.value)
+    setAsignacion("")
+    setStandby("")
+ /*     setDataUsers(data); */
+     // console.log(updatedList)
+     // setSearchfield(event.target.value);
+      
+   };
+
   Private.FiltroCarreras = FiltroCarreras;
   Private.FiltroEsperas= FiltroEsperas;
+  Private.FiltroLimbos= FiltroLimbos;
 
   return (
     <>
@@ -380,7 +395,7 @@ const Private = ({ data }) => {
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).filter((upd) => String(upd.ESPERA).includes(standby)).map((usr, index) => (
+                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).filter((upd) => String(upd.ESPERA).includes(standby)).filter((upd) => String(upd.LIMBO).includes(limbo)).map((usr, index) => (
                                   <>
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                       <td class="w-4 p-4">{index + 1}</td> {}
@@ -568,7 +583,35 @@ const Private = ({ data }) => {
                   </Sidebar>
                  {/* <!-- Add User Modal --> */}
 <div class="hidden" id="add-user-modal">
-<form> 
+<form onSubmit={ async() =>{
+                      const getnombre = document.getElementById("nombre");
+                      const getcedula = document.getElementById("cedula");
+                      const getemail = document.getElementById("email");
+                      const getphone = document.getElementById("phone");
+                      const getturno = document.getElementById("Turno");
+                      const getdias = document.getElementById("Dias");
+                      const getseccion = document.getElementById("Seccion");
+                      const getcarrera = document.getElementById("Carrera");
+                      const getronda = document.getElementById("ronda");
+                      const getobserva = document.getElementById("observa");
+                      console.log(getnombre.value)
+                      console.log(getcedula.value)
+                      console.log(getemail.value)
+                      console.log(getphone.value)
+                      console.log(getturno.value)
+                      console.log(getdias.value)
+                      console.log(getseccion.value)
+                      console.log(getcarrera.value)
+                      console.log(getronda.value)
+                      console.log(getobserva.value)
+                      const Newdata = {NOMBRE_APELLIDO: getnombre.value, CEDULA: parseInt(getcedula.value),
+                       ASSIGN: getcarrera.value, CORREO: getemail.value, HORARIO:{ turno: parseInt(getturno.value), dias: parseInt(getdias.value)},
+                       OBSERVACIONES: getobserva.value, ROUND: parseInt(getronda.value), SECCION: getseccion.value, TELEFONO: parseInt(getphone.value)
+                       }
+                       console.log(Newdata)
+                       console.log(data)
+                       const res = await addField(Newdata);
+                    }} >  
     <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
         {/* <!-- Modal content --> */}
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
@@ -664,35 +707,7 @@ const Private = ({ data }) => {
                 </div>
                 {/* <!-- Modal footer --> */}
                 <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                    <button onClick={ async() =>{
-                      const getnombre = document.getElementById("nombre");
-                      const getcedula = document.getElementById("cedula");
-                      const getemail = document.getElementById("email");
-                      const getphone = document.getElementById("phone");
-                      const getturno = document.getElementById("Turno");
-                      const getdias = document.getElementById("Dias");
-                      const getseccion = document.getElementById("Seccion");
-                      const getcarrera = document.getElementById("Carrera");
-                      const getronda = document.getElementById("ronda");
-                      const getobserva = document.getElementById("observa");
-                      console.log(getnombre.value)
-                      console.log(getcedula.value)
-                      console.log(getemail.value)
-                      console.log(getphone.value)
-                      console.log(getturno.value)
-                      console.log(getdias.value)
-                      console.log(getseccion.value)
-                      console.log(getcarrera.value)
-                      console.log(getronda.value)
-                      console.log(getobserva.value)
-                      const Newdata = {NOMBRE_APELLIDO: getnombre.value, CEDULA: parseInt(getcedula.value),
-                       ASSIGN: getcarrera.value, CORREO: getemail.value, HORARIO:{ turno: parseInt(getturno.value), dias: parseInt(getdias.value)},
-                       OBSERVACIONES: getobserva.value, ROUND: parseInt(getronda.value), SECCION: getseccion.value, TELEFONO: parseInt(getphone.value)
-                       }
-                       console.log(Newdata)
-                       console.log(data)
-                       const res = await addField(Newdata);
-                    }} class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
+                    <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Añadir</button>
                 </div>
                 
             
@@ -737,6 +752,7 @@ export async function getServerSideProps() {
 export default withAuth(Private);
 export function FiltroCarrera(event) {Private.FiltroCarreras(event)}
 export function FiltroEspera(event) {Private.FiltroEsperas(event)}
+export function FiltroLimbo(event) {Private.FiltroLimbos(event)}
 
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";

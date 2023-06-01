@@ -33,7 +33,8 @@ export default async function updateUser(req, res) {
         ASISTENCIA_6 : user.ASISTENCIA_6,
         ASISTENCIA_7 : user.ASISTENCIA_7,
         ASISTENCIA_8 : user.ASISTENCIA_8,
-        ESPERA: user.ESPERA,  
+        ESPERA: user.ESPERA,
+        LIMBO: user.LIMBO,  
         } })
      //const updateuser = await db.collection("general").replaceOne({ "_id": new ObjectId(user._id) }, { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA }, { upsert: true });
 
