@@ -50,7 +50,7 @@ const Private = ({ data }) => {
 
 
   const addField = async (upd) => {
-    const res = await fetch(`http://localhost:3000/api/addUser`, {
+    const res = await fetch(`https://saberyemprender.vercel.app/api/addUser`, {
       method: "PUT",
       body: JSON.stringify(upd),
     });
@@ -689,7 +689,7 @@ const downloadExcel = (data) => {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`http://localhost:3000/api/getUsers`, {
+  const res = await fetch(`https://saberyemprender.vercel.app/api/getUsers`, {
     method: "GET",
   });
   const data = await res.json();

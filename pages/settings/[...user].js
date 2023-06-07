@@ -15,7 +15,7 @@ const Settings = ({ data }) => {
 
   //Para actualizar usuario
   const updateField = async (upd) => {
-    const res = await fetch(`http://localhost:3000/api/updateUser`, {
+    const res = await fetch(`https://saberyemprender.vercel.app/api/updateUser`, {
       method: "PUT",
       body: JSON.stringify(upd),
     });
@@ -24,7 +24,7 @@ const Settings = ({ data }) => {
 
   //Para borrar usuario
   const deleteField = async (upd) => {
-    const res = await fetch(`http://localhost:3000/api/deleteUser`, {
+    const res = await fetch(`https://saberyemprender.vercel.app/api/deleteUser`, {
       method: "PUT",
       body: JSON.stringify(upd),
       
@@ -53,7 +53,7 @@ const Settings = ({ data }) => {
                 <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
                   <li class="inline-flex items-center">
                     <a
-                      href="http://localhost:3000/"
+                      href="https://saberyemprender.vercel.app/"
                       class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white"
                     >
                       <svg
@@ -122,7 +122,7 @@ const Settings = ({ data }) => {
                   onClick={async () => {
                          
                     const res = await deleteField(data);
-                    window.location.replace('http://localhost:3000');
+                    window.location.replace('https://saberyemprender.vercel.app/');
                   }}
                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 absolute right-0"
                   id="delete">
@@ -1364,7 +1364,7 @@ export async function getServerSideProps(context) {
 
   try {
     const res = await fetch(
-      `http://localhost:3000/api/getOneUser?userid=${user[0]}&c=${user[1]}`
+      `https://saberyemprender.vercel.app/api/getOneUser?userid=${user[0]}&c=${user[1]}`
     );
 
     const data = await res.json();
