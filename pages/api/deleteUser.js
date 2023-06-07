@@ -13,7 +13,8 @@ export default async function deleteUser(req, res) {
     
       const client = await clientPromise;
      const db = client.db("saberyemprender");
-     // const updateuser = await db.collection("users").updateOne({ "_id": new ObjectId(user._id) }, { $set: { ...user } })
+      const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
+        BORRADO : "SI", } })
 
      /* const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
        NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
@@ -37,9 +38,9 @@ export default async function deleteUser(req, res) {
         ASISTENCIA_7 : user.ASISTENCIA_7,
         ASISTENCIA_8 : user.ASISTENCIA_8,  
         } }) */
-        console.log( "ESTE ES EL USER ANTES: " + user._id )
-     const updateuser = await db.collection("general").deleteOne({ "_id": new ObjectId(user._id) });
-     console.log( "ESTE ES EL USER DESPUES " + user._id )
+        
+     ///////const updateuser = await db.collection("general").deleteOne({ "_id": new ObjectId(user._id) });
+     
     /* if (updateuser) {
        console.log(">>>>>>.", updateuser)
      }

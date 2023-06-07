@@ -37,6 +37,7 @@ export default async function addUser(req, res) {
         ROUND : user.ROUND,
         SECCION : user.SECCION, 
         TELEFONO : user.TELEFONO,
+        BORRADO : "no",
         });
 
     /* if (updateuser) {

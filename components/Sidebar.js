@@ -1,5 +1,5 @@
 import { useUser } from '../auth/useUser';
-import { FiltroCarrera, FiltroEspera, FiltroLimbo } from '../pages/index';
+import { FiltroCarrera, FiltroEspera, FiltroLimbo, FiltroRonda } from '../pages/index';
 
 const Sidebar = (props) => {
   const { user, logout } = useUser();
@@ -64,7 +64,20 @@ const Sidebar = (props) => {
             </a>
           </li>
           
-          
+          <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" height="1em" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+              <button onClick={(e) =>FiltroRonda(e)}  class="flex-1 ml-3 whitespace-nowrap" value="1">Ronda 1</button>
+            </a>
+          </li>
+
+
+          <li>
+            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" height="1em" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+              <button onClick={(e) =>FiltroRonda(e)}  class="flex-1 ml-3 whitespace-nowrap" value="2">Ronda 2</button>
+            </a>
+          </li>
 
           {/* <li>
             <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">

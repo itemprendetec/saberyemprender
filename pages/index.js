@@ -6,7 +6,7 @@ import Head from "next/head";
 import * as XLSX from 'xlsx';
 
 const Private = ({ data }) => {
-  function chunckArrayInGroups(arr, size) {
+  /* function chunckArrayInGroups(arr, size) {
     var chunk = [],
       i; // declara array vacio e indice de for
     for (
@@ -16,26 +16,23 @@ const Private = ({ data }) => {
     )
       chunk.push(arr.slice(i, i + size)); // push al array el tramo desde el indice del loop hasta el valor size + el indicador
     return chunk;
-  }
+  } */
 
   const { user, logout } = useUser();
   const [users, setDataUsers] = useState();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [searchfield, setSearchfield] = useState('');
   const [asignacion, setAsignacion] = useState('');
   const [standby, setStandby] = useState('');
   const [limbo, setLimbo] = useState('');
+  const [ronda, setRonda] = useState('');
 
   const [filteredList, setFilteredList] = useState();
 
   useEffect(() => {
 
     setDataUsers(data);
-    let fdl = chunckArrayInGroups(data, 20);
     setFilteredList(data);
-    setTotalPages(fdl.length);
     setLoading(false);
   }, []);
 
@@ -65,6 +62,7 @@ const Private = ({ data }) => {
    setAsignacion(event.target.value)
    setStandby("")
    setLimbo("")
+   setRonda("")
 /*     setDataUsers(data); */
     // console.log(updatedList)
     // setSearchfield(event.target.value);
@@ -93,10 +91,18 @@ const Private = ({ data }) => {
       
    };
 
+   function FiltroRondas (event)  {
+    
+    setRonda(parseInt(event.target.value))
+    
+      
+   };
+
+  //Para exportar las funciones fuera del main al navbar
   Private.FiltroCarreras = FiltroCarreras;
   Private.FiltroEsperas= FiltroEsperas;
   Private.FiltroLimbos= FiltroLimbos;
-
+  Private.FiltroRondas= FiltroRondas;
   return (
     <>
       <Head>
@@ -395,10 +401,11 @@ const Private = ({ data }) => {
                                 </tr>
                               </thead>
                               <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).filter((upd) => String(upd.ESPERA).includes(standby)).filter((upd) => String(upd.LIMBO).includes(limbo)).map((usr, index) => (
+                                
+                                {filteredList.filter((upd) => String(upd.NOMBRE_APELLIDO).toUpperCase().includes(searchfield.toUpperCase())).filter((upd) => String(upd.ASSIGN).toUpperCase().includes(asignacion)).filter((upd) => String(upd.ESPERA).includes(standby)).filter((upd) => String(upd.LIMBO).includes(limbo)).filter((upd) => String(upd.BORRADO).includes("no")).filter((upd) => String(upd.ROUND).includes(ronda)).map((usr,index) => (
                                   <>
                                     <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                      <td class="w-4 p-4">{index + 1}</td> {}
+                                      <td class="w-4 p-4">{index + 1}</td> {} 
                                       <td class="flex items-center p-4 mr-2 space-x-2 whitespace-nowrap">
                                         <div class="text-xs font-normal text-gray-500 dark:text-gray-400">
                                           <div class="text-xs font-semibold text-gray-900 dark:text-white">
@@ -408,7 +415,7 @@ const Private = ({ data }) => {
                                           </div>
                                         </div>
                                       </td>
-
+                                                
                                       <td class="p-4 text-xs font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         V-{usr.CEDULA}
                                       </td>
@@ -472,6 +479,7 @@ const Private = ({ data }) => {
                                         </a>
                                       </td>
                                     </tr>
+                                    
                                   </>
                                 ))}
                               </tbody>
@@ -484,10 +492,7 @@ const Private = ({ data }) => {
                       <div class="flex items-center mb-4 sm:mb-0">
                         <a
                           href="#"
-                          onClick={() => {
-                            if (currentPage - 1 < 0) return;
-                            setCurrentPage(currentPage - 1);
-                          }}
+                          
                           class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                         >
                           <svg
@@ -505,10 +510,7 @@ const Private = ({ data }) => {
                         </a>
                         <a
                           href="#"
-                          onClick={() => {
-                            if (currentPage + 1 >= totalPages) return;
-                            setCurrentPage(currentPage + 1);
-                          }}
+                          
                           class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                         >
                           <svg
@@ -527,63 +529,21 @@ const Private = ({ data }) => {
                         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                           Actualmente existen un total de {" "}
                           <span class="font-semibold text-gray-900 dark:text-white">
-                            {filteredList.length}
+                            {filteredList.length - filteredList.filter((upd) => String(upd.BORRADO).includes("SI")).length}
                           </span>{" "}
                           Alumnos en la plataforma{" "}
                           
                         </span>
                       </div>
                       <div class="flex items-center space-x-3">
-                        {/* <a
-                          href="#"
-                          onClick={() => {
-                            if (currentPage - 1 < 0) return;
-                            setCurrentPage(currentPage - 1);
-                          }}
-                          class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        >
-                          <svg
-                            class="w-5 h-5 mr-1 -ml-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                              clip-rule="evenodd"
-                            ></path>
-                          </svg>
-                          Previous
-                        </a>
-                        <a
-                          href="#"
-                          onClick={() => {
-                            if (currentPage + 1 >= totalPages) return;
-                            setCurrentPage(currentPage + 1);
-                          }}
-                          class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        >
-                          Next
-                          <svg
-                            class="w-5 h-5 ml-1 -mr-1"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill-rule="evenodd"
-                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                              clip-rule="evenodd"
-                            ></path>
-                          </svg>
-                        </a> */}
+                        
                       </div>
                     </div>
                   </Sidebar>
+                  
                  {/* <!-- Add User Modal --> */}
-<div class="hidden" id="add-user-modal">
-<form onSubmit={ async() =>{
+                  <div class="hidden" id="add-user-modal">
+                  <form onSubmit={ async() =>{
                       const getnombre = document.getElementById("nombre");
                       const getcedula = document.getElementById("cedula");
                       const getemail = document.getElementById("email");
@@ -594,22 +554,11 @@ const Private = ({ data }) => {
                       const getcarrera = document.getElementById("Carrera");
                       const getronda = document.getElementById("ronda");
                       const getobserva = document.getElementById("observa");
-                      console.log(getnombre.value)
-                      console.log(getcedula.value)
-                      console.log(getemail.value)
-                      console.log(getphone.value)
-                      console.log(getturno.value)
-                      console.log(getdias.value)
-                      console.log(getseccion.value)
-                      console.log(getcarrera.value)
-                      console.log(getronda.value)
-                      console.log(getobserva.value)
                       const Newdata = {NOMBRE_APELLIDO: getnombre.value, CEDULA: parseInt(getcedula.value),
                        ASSIGN: getcarrera.value, CORREO: getemail.value, HORARIO:{ turno: parseInt(getturno.value), dias: parseInt(getdias.value)},
                        OBSERVACIONES: getobserva.value, ROUND: parseInt(getronda.value), SECCION: getseccion.value, TELEFONO: parseInt(getphone.value)
                        }
-                       console.log(Newdata)
-                       console.log(data)
+                       
                        const res = await addField(Newdata);
                     }} >  
     <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
@@ -753,6 +702,7 @@ export default withAuth(Private);
 export function FiltroCarrera(event) {Private.FiltroCarreras(event)}
 export function FiltroEspera(event) {Private.FiltroEsperas(event)}
 export function FiltroLimbo(event) {Private.FiltroLimbos(event)}
+export function FiltroRonda(event) {Private.FiltroRondas(event)}
 
 // import firebase from "firebase/compat/app";
 // import "firebase/compat/auth";

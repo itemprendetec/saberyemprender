@@ -1,6 +1,5 @@
 import withAuth from "@/auth/withAuth";
 import { useUser } from "@/auth/useUser";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 const Settings = ({ data }) => {
@@ -14,7 +13,7 @@ const Settings = ({ data }) => {
     if (data) { setLoading(false) };
   }, [])
 
-
+  //Para actualizar usuario
   const updateField = async (upd) => {
     const res = await fetch(`http://localhost:3000/api/updateUser`, {
       method: "PUT",
@@ -23,9 +22,10 @@ const Settings = ({ data }) => {
     return res.json();
   }
 
+  //Para borrar usuario
   const deleteField = async (upd) => {
     const res = await fetch(`http://localhost:3000/api/deleteUser`, {
-      method: "POST",
+      method: "PUT",
       body: JSON.stringify(upd),
       
     });
@@ -116,6 +116,7 @@ const Settings = ({ data }) => {
               <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
                 Información del usuario
               </h1>
+            {/* boton de borrar */}
               <div class="relative m-4">
                   <button
                   onClick={async () => {
@@ -129,7 +130,7 @@ const Settings = ({ data }) => {
                   </button>
                 </div>
             </div>
-
+                  {/* Foto del usuario */}
             <div class="col-span-full xl:col-auto">
               <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                 <div class="grid items-center gap-4 sm:flex xl:block 2xl:flex sm:space-x-4 xl:space-x-0 2xl:space-x-4">
@@ -149,6 +150,7 @@ const Settings = ({ data }) => {
 
 
                   </div>
+                  {/* Boton para añadir a espera */}
                   <div class="grid gap-2">
                       <button
                       value= {data.ESPERA == "Si" ? "Si" : "No"}
@@ -164,7 +166,7 @@ const Settings = ({ data }) => {
                         id=" save1">
                          En espera: {data.ESPERA == "Si" ? "Si" : "No"}
                   </button>
-                      
+                      {/* Boton para añadir al limbo */}
                   <button
                       value= {data.LIMBO == "Si" ? "Si" : "No"}
                         onClick={async (e) => {
@@ -1255,20 +1257,7 @@ const Settings = ({ data }) => {
                           </div>
                         </div>
                       </label>
-                       { /* <input
-                        type="text"
-                        name="turn"
-                        id="inputTurno"
-                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder={
-                            data.HORARIO.turno == 0 ? "Matutino" : "Vespertino"
-                        }
-                        onChange={(e) => {
-                           data.HORARIO.turno  = e.target.value
-                        }}
-                        disabled={true}
-                      /> */}
-
+                       
                       <select id="inputTurno" disabled={true}
                      onChange={(e) => {
                             data.HORARIO.turno  = parseInt(e.target.value)
@@ -1331,22 +1320,7 @@ const Settings = ({ data }) => {
                           </div>
                         </div>
                       </label>
-                      {/*<input
-                                              type="text"
-                                              name="dia"
-                                              id="inputDia"
-                                              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                              placeholder={
-                                                  data.HORARIO.dias == 0 ? "Lunes y martes" : "Miercoles y Jueves"
-                                              }
-                                              
-                                              onChange={(e) => {
-                                                  const a = String(e.target.value).toLowerCase == "lunes y martes" ? 0 : 1
-                                                data.HORARIO.dias = a
-                                              }}
-                                              disabled={true}
-                                              
-                                            />*/}
+                      
 
                       <select id="inputDia" disabled={true}
                      onChange={(e) => {
