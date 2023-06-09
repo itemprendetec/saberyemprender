@@ -11,8 +11,8 @@ export default async function updateUser(req, res) {
       const client = await clientPromise;
      const db = client.db("saberyemprender");
      // const updateuser = await db.collection("users").updateOne({ "_id": new ObjectId(user._id) }, { $set: { ...user } })
-
-     const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
+      //const updatemany= await db.collection("general").updateMany( {}, { $rename: { "BORRADO": "PROBLEMA" } } )
+      const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
        NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
         CEDULA : user.CEDULA,
         ASSIGN : user.ASSIGN,
@@ -35,7 +35,7 @@ export default async function updateUser(req, res) {
         ASISTENCIA_8 : user.ASISTENCIA_8,
         ESPERA: user.ESPERA,
         LIMBO: user.LIMBO,  
-        } })
+        } }) 
      //const updateuser = await db.collection("general").replaceOne({ "_id": new ObjectId(user._id) }, { NOMBRE_APELLIDO : user.NOMBRE_APELLIDO, CEDULA : user.CEDULA }, { upsert: true });
 
     /* if (updateuser) {

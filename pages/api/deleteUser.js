@@ -14,7 +14,7 @@ export default async function deleteUser(req, res) {
       const client = await clientPromise;
      const db = client.db("saberyemprender");
       const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
-        BORRADO : "SI", } })
+        PROBLEMA : "SI", } })
 
      /* const updateuser = await db.collection("general").updateOne({ "_id": new ObjectId(user._id) }, { $set: {
        NOMBRE_APELLIDO : user.NOMBRE_APELLIDO,
