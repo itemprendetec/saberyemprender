@@ -164,7 +164,7 @@ const Settings = ({ data }) => {
                         }}
                          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                         id=" save1">
-                         En espera: {data.ESPERA == "Si" ? "Si" : "No"}
+                         Certificación básica: {data.ESPERA == "Si" ? "Si" : "No"}
                   </button>
                       {/* Boton para añadir al limbo */}
                   <button
@@ -179,7 +179,7 @@ const Settings = ({ data }) => {
                         }}
                          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                         id=" save1">
-                         En el Limbo: {data.LIMBO == "Si" ? "Si" : "No"}
+                         Certificación Profesional: {data.LIMBO == "Si" ? "Si" : "No"}
                   </button>
                   </div>
 
