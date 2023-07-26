@@ -72,7 +72,7 @@ const Private = ({ data }) => {
   function FiltroEsperas (event)  {
     
    setStandby(event.target.value)
-   setAsignacion("")
+   //setAsignacion("")
    setLimbo("")
 /*     setDataUsers(data); */
     // console.log(updatedList)
@@ -83,7 +83,7 @@ const Private = ({ data }) => {
   function FiltroLimbos (event)  {
     
     setLimbo(event.target.value)
-    setAsignacion("")
+    //setAsignacion("")
     setStandby("")
  /*     setDataUsers(data); */
      // console.log(updatedList)
